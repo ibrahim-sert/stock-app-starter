@@ -1,8 +1,10 @@
+import { useDispatch } from "react-redux";
 import { fetchFail, fetchStart } from "../features/authSlice";
 import { getSuccess } from "../features/stockSlice";
 import useAxios from "./useAxios";
 
 const useStockCall = () => {
+  const dispatch = useDispatch();
   const { axiosWithToken } = useAxios();
   //!-------Get Data----------//
   const getStockData = async (url) => {
@@ -20,12 +22,12 @@ const useStockCall = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.delete(`stock/${url}/${id}/`);
-      toastSuccessNotify(`${url} successfuly deleted`);
+      //   toastSuccessNotify(`${url} successfuly deleted`);
       getStockData(url);
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
-      toastErrorNotify(`${url} can not be deleted`);
+      //   toastErrorNotify(`${url} can not be deleted`);
     }
   };
   //!-----------------Post Data----------------//
@@ -33,12 +35,12 @@ const useStockCall = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.post(`stock/${url}/`, info);
-      toastSuccessNotify(`${url} successfuly posted`);
+      //   toastSuccessNotify(`${url} successfuly posted`);
       getStockData(url);
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
-      toastErrorNotify(`${url} can not be posted`);
+      //   toastErrorNotify(`${url} can not be posted`);
     }
   };
   //! ----------------Put Data----------------//
@@ -46,12 +48,15 @@ const useStockCall = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.put(`stock/${url}/${info.id}/`, info);
-      toastSuccessNotify(`${url} successfuly updated`);
+      //   toastSuccessNotify(`${url} successfuly updated`);
       getStockData(url);
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
-      toastErrorNotify(`${url} can not be updated`);
+      //   toastErrorNotify(`${url} can not be updated`);
     }
   };
+  return { getStockData, deleteStockData, postStockData, putStockData };
 };
+
+export default useStockCall;
