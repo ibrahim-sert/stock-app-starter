@@ -60,7 +60,7 @@ const useAuthCall = () => {
       // toastErrorNotify("Register can not be performed");
     }
   };
-  return { login, register };
+  return { login, register, logout };
 };
 
 export default useAuthCall;
