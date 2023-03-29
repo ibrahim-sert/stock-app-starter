@@ -3,29 +3,42 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
+import { btnStyle, flex } from "../styles/globalStyle";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EditIcon from "@mui/icons-material/Edit";
 const FirmCard = ({ firm }) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card
+      sx={{
+        p: 2,
+        width: "300px",
+        height: "400px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
       <CardMedia
-        sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
-        title="green iguana"
+        sx={{ p: 1, objectFit: "contain", height: "130px" }}
+        image={firm?.image}
+        title="firm-image"
+        component="img"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          {firm.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {firm.address}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {firm.phone}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+      <CardActions sx={flex}>
+        <EditIcon sx={btnStyle} />
+        <DeleteOutlineIcon sx={btnStyle} />
       </CardActions>
     </Card>
   );

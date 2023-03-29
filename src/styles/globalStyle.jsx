@@ -7,7 +7,7 @@ export const flex = {
 
 export const btnStyle = {
   cursor: "pointer",
-  "&:hover": { color: "red" },
+  "&:hover": { color: "#1976D2" },
 };
 export const modalStyle = {
   position: "absolute",
