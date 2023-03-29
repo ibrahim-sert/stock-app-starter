@@ -6,6 +6,7 @@ import {
   fetchFail,
   fetchStart,
   loginSuccess,
+  logoutSuccess,
   registerSuccess,
 } from "../features/authSlice";
 
@@ -26,6 +27,18 @@ const useAuthCall = () => {
       // toastSuccessNotify("Login performed")
       navigate("/stock");
       console.log(data);
+    } catch (error) {
+      dispatch(fetchFail());
+      console.log(error);
+    }
+  };
+  const logout = async () => {
+    dispatch(fetchStart());
+    try {
+      await axios.post(`${BASE_URL}account/auth/logout/`);
+      dispatch(logoutSuccess());
+      // toastSuccessNotify("Login performed")
+      navigate("/");
     } catch (error) {
       dispatch(fetchFail());
       console.log(error);

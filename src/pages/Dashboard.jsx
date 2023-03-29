@@ -12,6 +12,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuListItems from "../components/MenuListItems";
 import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Button } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -22,7 +24,7 @@ function ResponsiveDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
+  const { currentUser } = useSelector((state) => state.auth);
   const drawer = (
     <div>
       <Toolbar />
@@ -57,6 +59,7 @@ function ResponsiveDrawer(props) {
           <Typography variant="h6" noWrap component="div">
             Stock App
           </Typography>
+          {currentUser && <Button color="inherit">Log Out</Button>}
         </Toolbar>
       </AppBar>
       <Box
