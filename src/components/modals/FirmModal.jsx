@@ -90,7 +90,7 @@ export default function FirmModal({ open, info, setInfo, handleClose }) {
               value={info?.image || ""}
             />
             <Button loadingPosition="center" variant="contained" type="submit">
-              Submit
+              Save Firm
             </Button>
           </Box>
         </Box>
