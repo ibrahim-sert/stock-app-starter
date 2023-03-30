@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
+import useStockCall from "../../hooks/useStockCall";
 
 const style = {
   position: "absolute",
@@ -21,19 +22,31 @@ const BrandModal = ({ info, setInfo, open, handleClose }) => {
     const { value, name } = e.target;
     setInfo({ ...info, [name]: value });
   };
+  const { putStockData } = useStockCall();
+  const { postStockData } = useStockCall();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (info.id) {
+      putStockData("brands", info);
+    } else {
+      postStockData("brands", info);
+    }
+    handleClose();
+    setInfo({});
   };
   return (
     <div>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={() => {
+          handleClose();
+          setInfo({});
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} component="form">
+        <Box onSubmit={handleSubmit} sx={style} component="form">
           <TextField
             variant="outlined"
             label="Brand Name"
@@ -52,7 +65,7 @@ const BrandModal = ({ info, setInfo, open, handleClose }) => {
             onChange={handleChange}
             value={info?.image || ""}
           ></TextField>
-          <Button variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="primary">
             Save Brand
           </Button>
         </Box>
