@@ -4,18 +4,19 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 import useStockCall from "../../hooks/useStockCall";
+import { flexColumn, modalStyle } from "../../styles/globalStyle";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+// const style = {
+//   position: "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: 400,
+//   bgcolor: "background.paper",
+//   border: "2px solid #000",
+//   boxShadow: 24,
+//   p: 4,
+// };
 
 const BrandModal = ({ info, setInfo, open, handleClose }) => {
   const handleChange = (e) => {
@@ -36,17 +37,17 @@ const BrandModal = ({ info, setInfo, open, handleClose }) => {
     setInfo({});
   };
   return (
-    <div>
-      <Modal
-        open={open}
-        onClose={() => {
-          handleClose();
-          setInfo({});
-        }}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box onSubmit={handleSubmit} sx={style} component="form">
+    <Modal
+      open={open}
+      onClose={() => {
+        handleClose();
+        setInfo({});
+      }}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={modalStyle}>
+        <Box sx={flexColumn} onSubmit={handleSubmit} component="form">
           <TextField
             variant="outlined"
             label="Brand Name"
@@ -69,8 +70,8 @@ const BrandModal = ({ info, setInfo, open, handleClose }) => {
             Save Brand
           </Button>
         </Box>
-      </Modal>
-    </div>
+      </Box>
+    </Modal>
   );
 };
 export default BrandModal;
