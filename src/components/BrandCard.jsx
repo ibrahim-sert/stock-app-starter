@@ -8,22 +8,14 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import { btnStyle, flex } from "../styles/globalStyle";
 
-const BrandCard = () => {
+const BrandCard = ({ brand }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
-        title="green iguana"
-      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          {brand.name}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
+        <CardMedia sx={{ height: 140 }} image={brand.image} title="imic" />
       </CardContent>
       <CardActions sx={flex}>
         <EditIcon sx={btnStyle} />

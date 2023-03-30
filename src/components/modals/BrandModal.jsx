@@ -16,7 +16,15 @@ const style = {
   p: 4,
 };
 
-const BrandModal = ({ open, handleClose }) => {
+const BrandModal = ({ info, setInfo, open, handleClose }) => {
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setInfo({ ...info, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <div>
       <Modal
@@ -25,13 +33,15 @@ const BrandModal = ({ open, handleClose }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} component="form">
           <TextField
             variant="outlined"
             label="Brand Name"
             name="name"
             id="name"
             type="text"
+            onChange={handleChange}
+            value={info?.name || ""}
           ></TextField>
           <TextField
             variant="outlined"
@@ -39,6 +49,8 @@ const BrandModal = ({ open, handleClose }) => {
             name="image"
             id="image"
             type="url"
+            onChange={handleChange}
+            value={info?.image || ""}
           ></TextField>
           <Button variant="contained" color="primary">
             Save Brand
