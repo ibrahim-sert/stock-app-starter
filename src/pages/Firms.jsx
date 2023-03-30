@@ -43,7 +43,7 @@ const Firms = () => {
       <Grid container sx={flex}>
         {firms?.map((firm) => (
           <Grid item key={firm.id}>
-            <FirmCard firm={firm} />
+            <FirmCard setOpen={setOpen} setInfo={setInfo} firm={firm} />
           </Grid>
         ))}
       </Grid>

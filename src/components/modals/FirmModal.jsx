@@ -2,7 +2,6 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
 import { TextField } from "@mui/material";
 import useStockCall from "../../hooks/useStockCall";
 
@@ -34,13 +33,17 @@ export default function FirmModal({ open, info, setInfo, handleClose }) {
     } else {
       postStockData("firms", info);
     }
+    setInfo({});
     handleClose();
   };
   return (
     <div>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={() => {
+          handleClose();
+          setInfo({});
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -57,6 +60,7 @@ export default function FirmModal({ open, info, setInfo, handleClose }) {
               type="text"
               variant="outlined"
               onChange={handleChange}
+              value={info?.name || ""}
             />
             <TextField
               label="Firm Phone"
@@ -65,6 +69,7 @@ export default function FirmModal({ open, info, setInfo, handleClose }) {
               type="tel"
               variant="outlined"
               onChange={handleChange}
+              value={info?.phone || ""}
             />
             <TextField
               label="Firm Address"
@@ -73,6 +78,7 @@ export default function FirmModal({ open, info, setInfo, handleClose }) {
               type="text"
               variant="outlined"
               onChange={handleChange}
+              value={info?.address || ""}
             />
             <TextField
               label="Logo"
@@ -81,6 +87,7 @@ export default function FirmModal({ open, info, setInfo, handleClose }) {
               type="url"
               variant="outlined"
               onChange={handleChange}
+              value={info?.image || ""}
             />
             <Button loadingPosition="center" variant="contained" type="submit">
               Submit
